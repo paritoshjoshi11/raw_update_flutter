@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:raw_update/view/widget/detail_view.dart';
 
 class NewsContainer extends StatelessWidget {
   final String imgUrl;
@@ -61,7 +62,7 @@ class NewsContainer extends StatelessWidget {
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.white.withOpacity(0.3), // White shadow
+                        color: Colors.white.withOpacity(0.3 ), // White shadow
                         blurRadius: 6,
                         offset: Offset(0, 3),
                       ),
@@ -86,12 +87,18 @@ class NewsContainer extends StatelessWidget {
               children: [
                 SizedBox(height: 30),
                 Text(
-                  newsHead,
+                  newsHead.length > 90
+                      ? "${newsHead.substring(0, 90)}..."
+                      : newsHead,
                   style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 30),
                 Text(
-                  newsDes,
+                    newsDes != "--"
+                        ? newsDes.length > 250
+                        ? newsDes.substring(0, 250)
+                        : "${newsDes.toString().substring(0, newsDes.length - 15)}..."
+                        : newsDes,
                   style: TextStyle(fontSize: 16, color: Colors.black54),
                 ),
                 SizedBox(height: 30),
@@ -106,7 +113,7 @@ class NewsContainer extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: ElevatedButton(
                   onPressed: () {
-                    print("Going to $newsUrl");
+                    print(newsUrl);
                   },
                   child: Text("Read More ... "),
                 ),
